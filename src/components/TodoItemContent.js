@@ -2,33 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class TodoItemContent extends React.PureComponent {
+
     render() {
-        const {props} = this;
-        let display = props.edit ? 'none' : 'block';
+        const todo = this.props;
+        let display = todo.edit ? 'none' : 'block';
         return (
             <label>
                 <input
                     type="checkbox"
-                    checked={props.complete}
-                    onChange={props.toggleTodo.bind(null, props.id)}
+                    checked={todo.complete}
+                    onChange={this.props.toggleTodo.bind(null, todo.id)}
                 />
                 <span>
-                {!props.edit ? props.text :
-                    <form onSubmit={props.editTodo.bind(null, props.id)}>
+                {!todo.edit ? todo.text :
+                    <form onSubmit={this.props.editTodo.bind(null, todo.id)}>
                         <input
+                            ref={el => this.ref = el}
                             autoFocus
                             style={{width: '200px'}}
-                            value={props.text}
-                            onChange={props.onChange.bind(null, props.id)}
-                            onBlur={props.editTodo.bind(null, props.id)}
+                            value={todo.text}
+                            onChange={ () => this.props.onChange(todo.id, this.ref.value) }
+                            onBlur={this.props.editTodo.bind(null, todo.id)}
                         />
                     </form>}
              </span>
                 <button className={'float waves-effect waves-light btn'}
-                        onClick={props.delTodo.bind(null, props.id)}>delTodo
+                        onClick={todo.delTodo.bind(null, todo.id)}>delTodo
                 </button>
                 <button className={'float waves-effect waves-light btn'}
-                        onClick={props.editTodo.bind(null, props.id)}
+                        onClick={this.props.editTodo.bind(null, todo.id)}
                         style={{display: display}}>editTodo
                 </button>
             </label>

@@ -1,10 +1,11 @@
-export const ACTIONS = {
+export const Actions = {
     ADD_TODO: 'ADD_TODO',
     DEL_TODO: 'DEL_TODO',
     FILTER_TODO: 'FILTER_TODO',
     TOGGLE_TODO: 'TOGGLE_TODO',
     EDIT_TODO: 'EDIT_TODO',
-    HANDLE_TODO: 'HANDLE_TODO'
+    HANDLE_TODO: 'HANDLE_TODO',
+    SHOW_BAR: 'SHOW_BAR'
 };
 
 export const FILTER_VALUES = {
@@ -13,18 +14,23 @@ export const FILTER_VALUES = {
     COMPLETED: 'COMPLETED'
 };
 
+let todoId = 0;
+
+
+
 export const addTodo = (text) => {
     return {
-        type: ACTIONS.ADD_TODO,
+        type: Actions.ADD_TODO,
         payload: {
-            text
+            text,
+            id: todoId++
         }
     }
 };
 
 export const delTodo = id => {
     return {
-        type: ACTIONS.DEL_TODO,
+        type: Actions.DEL_TODO,
         payload: {
             id
         }
@@ -33,7 +39,7 @@ export const delTodo = id => {
 
 export const filterTodo = (text) => {
     return {
-        type: ACTIONS.FILTER_TODO,
+        type: Actions.FILTER_TODO,
         payload: {
             text
         }
@@ -42,7 +48,7 @@ export const filterTodo = (text) => {
 
 export const toggleTodo = (id) => {
     return {
-        type: ACTIONS.TOGGLE_TODO,
+        type: Actions.TOGGLE_TODO,
         payload: {
             id
         }
@@ -51,7 +57,7 @@ export const toggleTodo = (id) => {
 
 export const editTodo = (id) => {
     return {
-        type: ACTIONS.EDIT_TODO,
+        type: Actions.EDIT_TODO,
         payload: {
             id
         }
@@ -60,7 +66,7 @@ export const editTodo = (id) => {
 
 export const handleTodo = (id, text) => {
     return {
-        type: ACTIONS.HANDLE_TODO,
+        type: Actions.HANDLE_TODO,
         payload: {
             id,
             text
